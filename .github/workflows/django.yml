@@ -45,10 +45,12 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: copy source via ssh key
       uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr --delete
+        path: app/
         remote_path: ~/
         remote_host: ${{ secrets.SSH_AWS_SERVER_IP }}
         remote_user: ${{ secrets.SSH_SERVER_USER }}
