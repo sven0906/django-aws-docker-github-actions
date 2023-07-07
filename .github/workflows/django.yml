@@ -45,6 +45,14 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
+    - name: copy source via ssh key
+      uses: burnett01/rsync-deployments@4.1
+      with:
+        switches: -avzr --delete
+        remote_path: ~/
+        remote_host: ${{ secrets.SSH_AWS_SERVER_IP }}
+        remote_user: ${{ secrets.SSH_SERVER_USER }}
+        remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Deploying Application
       uses: appleboy/ssh-action@master
       with:
