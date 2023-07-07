@@ -29,10 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY', default='qkl+xdr8aimpf-&x(mi7)dwt^-q77aji#j*d#02-5usa32r9!y')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(env("DEBUG", default=1))
+# DEBUG = int(env("DEBUG", default=1))
+DEBUG = True
 
 
-ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
+# ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
@@ -88,13 +90,17 @@ WSGI_APPLICATION = 'CoreRoot.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': env('DB_ENGINE', default='django.db.backends.postgresql_psycopg2'),
-        'NAME': env('DB_NAME', default='coredb'),
-        'USER': env('DB_USER', default='core'),
-        'PASSWORD': env('DB_PASSWORD', default='12345678'),
-        'HOST': env('DB_HOST', default='localhost'),
-        'PORT': env('DB_PORT', default='5432'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': env('DB_ENGINE', default='django.db.backends.postgresql_psycopg2'),
+    #     'NAME': env('DB_NAME', default='coredb'),
+    #     'USER': env('DB_USER', default='core'),
+    #     'PASSWORD': env('DB_PASSWORD', default='12345678'),
+    #     'HOST': env('DB_HOST', default='localhost'),
+    #     'PORT': env('DB_PORT', default='5432'),
+    # }
 }
 
 # Password validation
@@ -145,7 +151,8 @@ REST_FRAMEWORK = {
 }
 
 
-CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS").split(" ")
+# CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS").split(" ")
+# CORS_ALLOWED_ORIGINS = 'localhost'
 
 
 TESTING = False

@@ -21,10 +21,10 @@ services:
     restart: always
     env_file: .env
     ports:
-      - "5000:5000"
+      - "8000:8000"
     command: >
       sh -c " python manage.py migrate &&
-          gunicorn CoreRoot.wsgi:application --bind 0.0.0.0:5000"
+          gunicorn CoreRoot.wsgi:application --bind 0.0.0.0:8000"
     volumes:
      - .:/app
      - static_volume:/app/static
